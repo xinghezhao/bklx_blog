@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}二战那些事{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="main-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                {% for blog in blogs %}
+                    <div class="panel panel-primary">
+                        <div class="panel-heading text-center">
+                            <h3>{{ blog.title }}</h3>
+                            <h3 class="panel-title">作者:{{ blog.author}}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h3><img class = 'panel-img img-responsive' src="/static/{{ blog.image }}" alt=""></h3>
+                                </div>
+                                <div class="col-md-9 panel-character">
+                                    <a  href="{% url 'blogs' blog.id %}">{{ blog.introduce  }}</a>
+                                </div>                                  
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7 panel-label-classify">
+                                     <h5>分类：{{ blog.category}}</h5>
+                                     <h5>标签：{% for tag in blog.tags.all %}{{ tag }} {% endfor %}</h5>
+                                </div>
+                                <div class="col-md-5 panel-time">
+                                    <h5>{{ blog.created}}</h5>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                {% endfor %}                  
+            </div>
+
+            <div class="col-md-4" style = "box-shadow:10px 10px 10px #ccc; background:#fff;">
+                <div style="text-align: center;">
+                    <h3><a href="{% url 'timeline' %}">随言碎语</a></h3>
+                    <hr>
+                    <h3>{{ title}}</h3>
+                    <img  style = "width:200px;height:200px;"src="/static/{{ image }}" alt="">
+                    <p>{{ content}}</p>
+                    
+                    <span class="cd-date">{{ created }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+

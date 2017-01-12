@@ -1,0 +1,18 @@
+.panel-character {
+    font-size: 15px;
+    margin-top: 20px;
+}
+.panel-character>a {
+    text-overflow:ellipsis;
+}
+
+.panel-label-classify h5 {
+    display: inline;
+}
+.panel-label-classify h5:nth-child(1) {
+    margin-right: 20px;
+}
+
+.panel-time {
+    text-align:right;
+}

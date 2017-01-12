@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block hobby %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container-fluid" style="width:1020px;align:center;background:#E6E6E6;margin-top:28px;">
+    <div class="blog">
+        <div class="row-fluid" align="left">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="page-header">
+                        <h1>
+                            {{ blog.title }}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-small btn-info" type="button">文章分类:{{ blog.catagory.name }}</button>
+            <button class="btn btn-small btn-danger" type="button"> 作者：{{ blog.author }}</button>
+            <button class="btn btn-small btn-warning" type="button">
+                发布时间：{{ blog.created|date:"Y-m-d H:i" }}</button>
+            <span class="#" style="color: purple;">
+                {% for tag in tags %}
+                    <button class="btn btn-small btn-success" type="button">标签：{{ tag.name }}</button>
+                {% endfor %}
+            </span>
+        </div>
+
+        <div class="row-fluid" style = 'margin-top: 30px;'>
+            <div class="span12">
+                <pre><code style="font-size-adjust: inherit">{{ blog.content }}</code></pre>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="list-group" align="left">
+                    <a href="#" class="list-group-item active">评论列表</a>
+                    <small><strong>提示!</strong> * 以上用户言论只代表其个人观点，不代表作者的观点或立场<br></small>
+                    <div class="list-group-item">
+                        {% for comment in comments %}
+                            <div class="span12">
+                            <span class="badge badge-warning">{{ comment.name }}</span> 说:
+                            <span class="badge badge-warning">{{ comment.content }}</span>
+                            <hr>
+                        {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row-fluid" align="left">
+            <div class="progress active progress-striped progress-success">
+                <div class="bar"></div>
+            </div>
+
+            <div class="span12" id="form">
+                <div class="row-fluid">
+                    <font color="#006400" size="5">留言板</font>
+                </div>
+
+                      
+                <form action="{% url 'blogs' blog.id %}" method="post" onsubmit="return showForm()">
+                    <fieldset>
+                        {% csrf_token %}
+                        <table>
+                            {% for field in form %}
+                                <div class="input-field" style="padding-top: 10px">
+                                    <tr>
+                                        <td class = 'text'>{{ field.label }}&nbsp;&nbsp;</td>
+                                        <td class = 'text'> {{ field }}</td>
+                                    </tr>
+                                </div>
+
+                            {% endfor %}
+                        </table>
+
+                        <label><input type="checkbox" id="agreecheckbox"/>
+                            我同意作者的法律立场，使用合适的言论发言！
+                        </label> <br>
+
+
+                        <script type="text/javascript">
+                            function showForm() {
+                                var isChecked = document.getElementById('agreecheckbox').checked
+                                if (isChecked) {
+                                    return true
+                                } else {
+                                    alert('如果您不同意发言守则的话，抱歉不能让您提交！')
+                                    return false
+                                }
+                            }
+                        </script>
+                        <button class="btn btn-info" type="submit" style="margin-top: 10px">  &nbsp;&nbsp;提&nbsp; &nbsp; 交
+                            &nbsp;&nbsp;  
+                        </button>
+                    </fieldset>
+                </form>
+
+            </div>
+    </div>
+</div>
+{% endblock %}
+
+

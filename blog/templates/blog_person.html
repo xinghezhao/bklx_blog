@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}人物介绍{% endblock %}
+
+{% block hobby %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="main-page" style = "margin-top:30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                {% for blog in blogs_person%}
+                    <div class="row" style = "margin-bottom:50px;">
+                        <div class="col-md-3">
+                            <img src="/static/{{blog.image}}" alt="">
+                        </div>
+                        
+                        <div class="col-md-9">
+                              <a href="{% url 'person_id' blog.id %}">
+
+
+
+                                <h3>{{ blog.name }}</h3>
+                              </a> 
+                              <p>{{ blog.introduction }}</p>   
+                        </div>
+                    </div>
+                {%endfor%}
+                       
+                <p>{{ blog.person }}</p>
+                <p>{{blog.content}}</p>
+            </div>
+
+            <div class="col-md-4" style = "box-shadow:10px 10px 10px #ccc; background:#fff;">
+                <div style="text-align: center;">
+                    <h3><a href="{% url 'timeline' %}">随言碎语</a></h3>
+                    <hr>
+                    <h3>{{ title}}</h3>
+                    <img  style = "width:200px;height:200px;"src="/static/{{ image }}" alt="">
+                    <p>{{ content}}</p>
+                    
+                    <span class="cd-date">{{ created }}</span>
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

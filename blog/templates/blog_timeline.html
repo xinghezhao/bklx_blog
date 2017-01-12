@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}碎言碎语{% endblock %}
+
+{% block hobby %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <section id="cd-timeline" class="cd-container">
+                {% for timeline in all_timeline%}
+                <div class="cd-timeline-block">
+                    <div class="cd-timeline-img cd-picture">
+                        <img src="/static/images/cd-icon-picture.svg" alt="Picture">
+                    </div>
+                    
+                    <div class="cd-timeline-content" style = "box-shadow:10px 10px 10px #ccc;">
+                        <h3>{{ timeline.title}}</h3>
+                        <p>{{ timeline.content}}</p>
+                        <p><img style = "width:200px;height:200px;" class = "img-responsive" src="/static/{{ timeline.image }}" alt=""></p>
+                        <span class="cd-date">{{ timeline.created }}</span>
+                    </div>
+                    
+                </div>
+                {% endfor %}
+            </section>            
+        </div>
+        <div class="col-md-4" style = "box-shadow:10px 10px 10px #ccc; background:#fff;">
+            <div style="text-align: center;">
+                <h3><a href="{% url 'timeline' %}">随言碎语</a></h3>
+                <hr>
+                <h3>{{ title}}</h3>
+                <img  style = "width:200px;height:200px;"src="/static/{{ image }}" alt="">
+                <p>{{ content}}</p>
+                
+                <span class="cd-date">{{ created }}</span>
+            </div>
+        </div>         
+    </div>
+</div>
+
+{% endblock %}

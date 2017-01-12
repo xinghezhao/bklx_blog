@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %} 关于我{% endblock %}
+
+
+
+
+
+{% block content %}
+
+{% for all_aboutme in all_aboutmes %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row" style = "margin:10px 0;">
+                <div class="col-md-4" style = "text-align:center;">
+                    <img class = "img-circle" src="/static/images/boy.jpg" alt="">
+                    <h4>{{ all_aboutme.nickname }}</h4>
+                    <p>{{ all_aboutme.motto }}</p>
+                </div>
+                <div class="col-md-8">
+                    <h2>基本信息</h2>
+                    <ul>
+                        <li>{{ all_aboutme.name }}</li>
+                        <li>{{ all_aboutme.birthday }}</li>
+                        <li>{{ all_aboutme.university }}</li>
+                    </ul>
+                    <hr style="height:10px;border:0;border-bottom:1px dotted #3498DB;margin:0"/>
+                    
+                    <h2>专业技能</h2>
+                    <ul>
+                    {% for skill in all_aboutme.skills.all %}    
+                        <li>{{ skill }}</li>
+                        {% endfor %}
+                    </ul>
+                    <hr style="height:10px;border:0;border-bottom:1px dotted #3498DB;margin:0"/>
+
+                    <h2>生活相关</h2>
+                    <ul>
+                    {% for life in all_aboutme.lifes.all %}    
+                        <li>{{ life }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4" style = "box-shadow:10px 10px 10px #ccc; background:#fff;">
+            <div style="text-align: center;">
+                <h3><a href="{% url 'timeline' %}">随言碎语</a></h3>
+                <hr>
+                <h3>{{ title}}</h3>
+                <img  style = "width:200px;height:200px;"src="/static/{{ image }}" alt="">
+                <p>{{ content}}</p>
+                
+                <span class="cd-date">{{ created }}</span>
+            </div>
+        </div>        
+    </div>
+</div>
+
+{% endfor %}
+{% endblock %}
