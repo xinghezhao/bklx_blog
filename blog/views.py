@@ -14,13 +14,11 @@ def get_blogs(request):
 
     all_timeline = Speak.objects.all().order_by('-created')
 
-    first_timeline = all_timeline[0]
-    title = first_timeline.title
-    image = first_timeline.image
-    content = first_timeline.content
-    created = first_timeline.created    
-    return render(request, 'blog-list.html', 
-    {'blogs':blogs,'title':title,'image':image,'content':content,'created':created})
+    first_timeline = all_timeline[:1]
+    return render(request, 'blog-list.html', {
+        'blogs':blogs,
+        'first_timeline':first_timeline
+    })
 
 
 def blogs_detail(request,blog_id):
@@ -46,19 +44,13 @@ def blogs_person(request):
 
     all_timeline = Speak.objects.all().order_by('-created')
 
-    first_timeline = all_timeline[0]
-    title = first_timeline.title
-    image = first_timeline.image
-    content = first_timeline.content
-    created = first_timeline.created   
+    first_timeline = all_timeline[:1]
+
 
     return render(request,'blog_person.html',{
         'blogs_person':blogs_person,
-        'title':title,
-        'image':image,
-        'content':content,
-        'created':created}
-    )
+        'first_timeline':first_timeline
+    })
 
 
 
@@ -75,22 +67,15 @@ def timeline(request):
     
     all_timeline = Speak.objects.all().order_by('-created')
 
-    first_timeline = all_timeline[0]
 
-    title = first_timeline.title
-    image = first_timeline.image
-    content = first_timeline.content
-    created = first_timeline.created
+    first_timeline = all_timeline[:1]
 
 
-
- 
     return render(request,'blog_timeline.html', {
         'all_timeline':all_timeline,
-        'title':title,
-        'image':image,
-        'content':content,
-        'created':created})
+        'first_timeline':first_timeline
+    })
+
 
 
 def aboutme(request):
@@ -99,18 +84,12 @@ def aboutme(request):
 
     all_timeline = Speak.objects.all().order_by('-created')
 
-    first_timeline = all_timeline[1]
-    title = first_timeline.title
-    image = first_timeline.image
-    content = first_timeline.content
-    created = first_timeline.created
+    first_timeline = all_timeline[:1]
+
 
     return render(request,'blog_aboutme.html', {
         'all_aboutmes':all_aboutmes,
+        'first_timeline':first_timeline
 
-        'title':title,
-        'image':image,
-        'content':content,
-        'created':created
     })
 

@@ -28,18 +28,23 @@
                 {% endfor %}
             </section>            
         </div>
+
+    {% for time_line in first_timeline %}
         <div class="col-md-4" style = "box-shadow:10px 10px 10px #ccc; background:#fff;">
+
             <div style="text-align: center;">
                 <h3><a href="{% url 'timeline' %}">随言碎语</a></h3>
                 <hr>
-                <h3>{{ title}}</h3>
-                <img  style = "width:200px;height:200px;"src="/static/{{ image }}" alt="">
-                <p>{{ content}}</p>
+                <h3>{{ time_line.title}}</h3>
+                <img  style = "width:200px;height:200px;"src="/static/{{ MEDIA_URL }}{{ time_line.image }}" alt="">
+                <p>{{ time_line.content}}</p>
                 
-                <span class="cd-date">{{ created }}</span>
+                <span class="cd-date">{{ time_line.created }}</span>
             </div>
-        </div>         
+        </div>
+      {% endfor %}
     </div>
+
 </div>
 
 {% endblock %}
