@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-7">
-                {% for blog in blogs %}
+                {% for blog in blogs.object_list %}
                     <div class="panel panel-primary">
                         <div class="panel-heading text-center">
                             <h3>{{ blog.title }}</h3>
@@ -37,7 +37,30 @@
                             </div>    
                         </div>
                     </div>
-                {% endfor %}                  
+                {% endfor %}
+                <ul class="pagination col-md-12">
+                        {% if blogs.has_previous %}
+                            <li><a href="?{{ blogs.previous_page_number.querystring }}">&laquo;</a></li>
+                        {% else %}
+                             <li><a href="">&laquo;</a></li>
+                        {% endif %}
+                        {% for page in blogs.pages %}
+                            {% if page %}
+                                {% ifequal page blogs.number %}
+                                    <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                                {% else %}
+                                    <li class="disabled"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                                {% endifequal %}
+                            {% else %}
+                                ...
+                            {% endif %}
+                        {% endfor %}
+                        {% if blogs.has_next %}
+                            <li><a href="?{{ blogs.next_page_number.querystring }}">&raquo;</a></li>
+                        {% else %}
+                            <li><a href="#">&raquo;</a></li>
+                        {% endif %}
+                </ul>
             </div>
 
     {% for time_line in first_timeline %}

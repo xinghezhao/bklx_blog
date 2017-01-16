@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+# from django.views.static import serve
 
 from blog.views import get_blogs, blogs_detail, blogs_person, person_detail, timeline,aboutme
 
@@ -23,6 +24,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 #用户处理静态文件
 from django.views.generic import TemplateView
+
+# from mysite.settings import MEDIA_ROOT
 
 
 urlpatterns = [
@@ -34,5 +37,10 @@ urlpatterns = [
     url(r'^person/(\d+)/$', person_detail, name='person_id'),
     url(r'^timeline/$', timeline, name='timeline'),
     url(r'^aboutme/$', aboutme, name='aboutme'),
+
+    # # 配置上传文件的访问函数
+    # url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
+
+
 
 ]

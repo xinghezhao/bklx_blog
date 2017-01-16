@@ -2,6 +2,7 @@
 from django.shortcuts import render
 
 from blog.models import Catagory,Tag,Blog,Comment,Achievement,Person,Speak,Skill,Life,Aboutme
+from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from django.http import HttpResponse
 
@@ -12,11 +13,23 @@ from blog.forms import CommentForm
 def get_blogs(request):
     blogs = Blog.objects.all().order_by('-created')
 
+    #对首页进行分页
+    try:
+        page = request.GET.get('page', 1)
+    except PageNotAnInteger:
+        page = 1
+
+    p = Paginator(blogs, 5, request=request)
+
+    all_blogs = p.page(page)
+
+
     all_timeline = Speak.objects.all().order_by('-created')
 
     first_timeline = all_timeline[:1]
+
     return render(request, 'blog-list.html', {
-        'blogs':blogs,
+        'blogs':all_blogs,
         'first_timeline':first_timeline
     })
 
