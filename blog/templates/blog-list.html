@@ -6,7 +6,6 @@
 
 {% block content %}
 
-
 <div class="main-page">
     <div class="container">
         <div class="row">
@@ -24,7 +23,7 @@
                                 </div>
                                 <div class="col-md-9 panel-character">
                                     <a  href="{% url 'blogs' blog.id %}">{{ blog.introduce  }}</a>
-                                </div>                                  
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-7 panel-label-classify">
@@ -34,53 +33,51 @@
                                 <div class="col-md-5 panel-time">
                                     <h5>{{ blog.created}}</h5>
                                 </div>
-                            </div>    
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
                 <ul class="pagination col-md-12">
-                        {% if blogs.has_previous %}
-                            <li><a href="?{{ blogs.previous_page_number.querystring }}">&laquo;</a></li>
-                        {% else %}
-                             <li><a href="">&laquo;</a></li>
-                        {% endif %}
-                        {% for page in blogs.pages %}
-                            {% if page %}
-                                {% ifequal page blogs.number %}
-                                    <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
-                                {% else %}
-                                    <li class="disabled"><a href="?{{ page.querystring }}">{{ page }}</a></li>
-                                {% endifequal %}
+                    {% if blogs.has_previous %}
+                        <li><a href="?{{ blogs.previous_page_number.querystring }}">&laquo;</a></li>
+                    {% else %}
+                         <li><a href="">&laquo;</a></li>
+                    {% endif %}
+                    {% for page in blogs.pages %}
+                        {% if page %}
+                            {% ifequal page blogs.number %}
+                                <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
                             {% else %}
-                                ...
-                            {% endif %}
-                        {% endfor %}
-                        {% if blogs.has_next %}
-                            <li><a href="?{{ blogs.next_page_number.querystring }}">&raquo;</a></li>
+                                <li class="disabled"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                            {% endifequal %}
                         {% else %}
-                            <li><a href="#">&raquo;</a></li>
+                            ...
                         {% endif %}
+                    {% endfor %}
+                    {% if blogs.has_next %}
+                        <li><a href="?{{ blogs.next_page_number.querystring }}">&raquo;</a></li>
+                    {% else %}
+                        <li><a href="#">&raquo;</a></li>
+                    {% endif %}
                 </ul>
             </div>
 
-    {% for time_line in first_timeline %}
-        <div class="col-md-4" style = "box-shadow:10px 10px 10px #ccc; background:#fff;">
+            {% for time_line in first_timeline %}
+                <div class="col-md-4" style = "box-shadow:10px 10px 10px #ccc; background:#fff;">
 
-            <div style="text-align: center;">
-                <h3><a href="{% url 'timeline' %}">随言碎语</a></h3>
-                <hr>
-                <h3>{{ time_line.title}}</h3>
-                <img  style = "width:200px;height:200px;"src="/static/{{ MEDIA_URL }}{{ time_line.image }}" alt="">
-                <p>{{ time_line.content}}</p>
+                    <div style="text-align: center;">
+                        <h3><a href="{% url 'timeline' %}">随言碎语</a></h3>
+                        <hr>
+                        <h3>{{ time_line.title}}</h3>
+                        <img  style = "width:200px;height:200px;"src="/static/{{ MEDIA_URL }}{{ time_line.image }}" alt="">
+                        <p>{{ time_line.content}}</p>
 
-                <span class="cd-date">{{ time_line.created }}</span>
-            </div>
+                        <span class="cd-date">{{ time_line.created }}</span>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
     </div>
 </div>
 
 {% endblock %}
-
-
-
